@@ -45,10 +45,9 @@ import org.openjdk.jmh.annotations.Warmup;
 
 public class SortingBenchmark {
 
-	public static void main(String[] args) throws IOException {
-		System.out.println("***STARTING BENCHMARKS***");
+	/*public static void main(String[] args) throws IOException {
 		org.openjdk.jmh.Main.main(args);
-	}
+	}*/
 
 	@Benchmark
 	@BenchmarkMode(Mode.SingleShotTime)
