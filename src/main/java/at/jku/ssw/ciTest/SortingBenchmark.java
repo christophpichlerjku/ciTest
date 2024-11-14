@@ -45,14 +45,14 @@ import org.openjdk.jmh.annotations.Warmup;
 
 public class SortingBenchmark {
 
-	/*public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException {
 		org.openjdk.jmh.Main.main(args);
-	}*/
+	}
 
 	@Benchmark
 	@BenchmarkMode(Mode.SingleShotTime)
 	@OutputTimeUnit(TimeUnit.MILLISECONDS)
-	@Fork(3)
+	@Fork(0)
 	@Warmup(iterations = 5, time = 100, timeUnit = TimeUnit.MILLISECONDS)
 	@Measurement(iterations = 5, time = 100, timeUnit = TimeUnit.MILLISECONDS)
 	public void testMethod(Workload workload) {
