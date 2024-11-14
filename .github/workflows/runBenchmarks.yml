@@ -1,0 +1,48 @@
+name: Run Benchmarks
+
+# Trigger the workflow on any push or pull_request to any branch
+on:
+  push:
+    branches:
+      - '**'  # Matches all branches
+  pull_request:
+    branches:
+      - '**'  # Matches all branches
+
+jobs:
+  run_benchmarks:
+    runs-on: ubuntu-latest  # Specify the environment (Linux)
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Step 2: Set up JDK (Java Development Kit)
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '21'  # Specify the version of JDK, change it if necessary
+          distribution: 'adoptopenjdk'  # Use AdoptOpenJDK distribution
+
+      # Step 3: Set up Maven (if using Maven)
+      - name: Set up Maven
+        uses: actions/setup-java@v3
+        with:
+          java-version: '21'  # Ensure JDK matches
+          mvn-version: '3.8.1'  # Specify the Maven version, if using Maven
+
+      # Step 4: Install project dependencies (if using Maven)
+      - name: Install dependencies (Maven)
+        run: mvn install --no-transfer-progress
+
+      # Step 5: Run the benchmarks
+      - name: Run benchmarks
+        run: mvn exec:java -Dexec.mainClass="at.jku.ssw.ciTest.SortingBenchmark"  # Change to your benchmark's entry point
+        
+      - name: Upload benchmark results
+        uses: actions/upload-artifact@v3
+        with:
+          name: benchmark-results
+          path: target/benchmark-results.txt  # Adjust path to your benchmark result file
+
