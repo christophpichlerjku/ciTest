@@ -22,8 +22,8 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
-          java-version: '21'  # Specify the version of JDK, change it if necessary
-          distribution: 'adoptopenjdk'  # Use AdoptOpenJDK distribution
+          java-version: '21' 
+          distribution: 'oracle' 
 
       # Step 3: Set up Maven (if using Maven)
       - name: Set up Maven
