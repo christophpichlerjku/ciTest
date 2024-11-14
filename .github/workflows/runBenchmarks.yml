@@ -34,6 +34,7 @@ jobs:
       - name: Run benchmarks
         run: mvn exec:java -Dexec.mainClass="at.jku.ssw.ciTest.SortingBenchmark"  # Change to your benchmark's entry point
         
+      # Step 5: Store the benchmarks  
       - name: Upload benchmark results
         uses: actions/upload-artifact@v3
         with:
