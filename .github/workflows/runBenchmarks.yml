@@ -4,7 +4,7 @@ name: Run Benchmarks
 on:
   push:
     branches:
-      - 'challenge*'  # Matches all branches
+      - '**'  # Matches all branches 'challenge*'
   pull_request:
     branches:
       - '**'  # Matches all branches
@@ -18,25 +18,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # Step 2: Set up JDK (Java Development Kit)
-      - name: Set up JDK
+      # Step 2: Set up JDK and Maven
+      - name: Set up JDK and Maven
         uses: actions/setup-java@v3
         with:
-          java-version: '21' 
-          distribution: 'adopt' 
-
-      # Step 3: Set up Maven (if using Maven)
-      - name: Set up Maven
-        uses: actions/setup-java@v3
-        with:
+          distribution: 'adopt'
           java-version: '21'  # Ensure JDK matches
           mvn-version: '3.8.1'  # Specify the Maven version, if using Maven
 
-      # Step 4: Install project dependencies (if using Maven)
+      # Step 3: Install project dependencies (if using Maven)
       - name: Install dependencies (Maven)
         run: mvn install --no-transfer-progress
 
-      # Step 5: Run the benchmarks
+      # Step 4: Run the benchmarks
       - name: Run benchmarks
         run: mvn exec:java -Dexec.mainClass="at.jku.ssw.ciTest.SortingBenchmark"  # Change to your benchmark's entry point
         
