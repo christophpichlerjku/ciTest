@@ -10,7 +10,7 @@ import org.openjdk.jmh.annotations.TearDown;
 
 @State(Scope.Benchmark)
 public class Workload {
-	@Param(value = {"10000","100000","1000000"})
+	@Param(value = {"10000","100000","1000000","10000000"})
 	private int arraySize;
 
 	private final Random random = new Random(1);

@@ -41,9 +41,7 @@ import org.openjdk.jmh.annotations.Fork;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
-import org.openjdk.jmh.annotations.Timeout;
 import org.openjdk.jmh.annotations.Warmup;
-@Timeout(time = 1,timeUnit = TimeUnit.SECONDS)
 public class SortingBenchmark {
 
 	public static void main(String[] args) throws IOException {
@@ -70,17 +68,18 @@ public class SortingBenchmark {
 	@Fork(0)
 	@Warmup(iterations = 5, time = 100, timeUnit = TimeUnit.MILLISECONDS)
 	@Measurement(iterations = 5, time = 100, timeUnit = TimeUnit.MILLISECONDS)
-	public void testBubbleSort(Workload workload) {
-		double[] data = workload.data;
-		for(int i=data.length-1;i>0;i--) {
-			for(int j=0;j<i;j++) {
-				if(data[j]>data[j+1]) {
-					double tmp = data[j];
-					data[j] = data[j+1];
-					data[j+1] = tmp;
-				}
-			}
-		}
+	public void testQuickSortS(Workload workload) {
+		QuickSortS.sort(workload.data);
+	}
+	
+	@Benchmark
+	@BenchmarkMode(Mode.SingleShotTime)
+	@OutputTimeUnit(TimeUnit.MILLISECONDS)
+	@Fork(0)
+	@Warmup(iterations = 5, time = 100, timeUnit = TimeUnit.MILLISECONDS)
+	@Measurement(iterations = 5, time = 100, timeUnit = TimeUnit.MILLISECONDS)
+	public void testQuickSortO(Workload workload) {
+		QuickSortO.sort(workload.data);
 	}
 	
 	@Benchmark
