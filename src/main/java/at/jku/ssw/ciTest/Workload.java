@@ -10,21 +10,22 @@ import org.openjdk.jmh.annotations.TearDown;
 @State(Scope.Benchmark)
 public class Workload {
 	static final int ARRAY_SIZE = 100_000;
-	int[] data;
+
 	private final Random random = new Random(1);
+	double[] data;
 
 	@Setup
 	public void init() {
-		data = new int[ARRAY_SIZE];
+		data = new double[ARRAY_SIZE];
 		for (int i = 0; i < data.length; i++) {
-			data[i] = random.nextInt();
+			data[i] = random.nextDouble();
 		}
 	}
 
 	@TearDown
 	public void check() {
 		for (int i = 1; i < data.length; i++) {
-			if (data[i] < data[i - 1]) {
+			if (data[i]<data[i-1]) {
 				throw new IllegalArgumentException("Arrays not sorted at indices %d/%d".formatted(i - 1, i));
 			}
 		}

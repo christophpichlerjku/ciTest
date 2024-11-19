@@ -46,6 +46,9 @@ import org.openjdk.jmh.annotations.Warmup;
 public class SortingBenchmark {
 
 	public static void main(String[] args) throws IOException {
+		args = Arrays.copyOf(args, args.length+2);
+		args[args.length-2] = "-rf";
+		args[args.length-1] = "json";
 		org.openjdk.jmh.Main.main(args);
 	}
 
@@ -55,8 +58,18 @@ public class SortingBenchmark {
 	@Fork(0)
 	@Warmup(iterations = 5, time = 100, timeUnit = TimeUnit.MILLISECONDS)
 	@Measurement(iterations = 5, time = 100, timeUnit = TimeUnit.MILLISECONDS)
-	public void testMethod(Workload workload) {
+	public void testJavaArraySort(Workload workload) {
 		Arrays.sort(workload.data);
+	}
+	
+	@Benchmark
+	@BenchmarkMode(Mode.SingleShotTime)
+	@OutputTimeUnit(TimeUnit.MILLISECONDS)
+	@Fork(0)
+	@Warmup(iterations = 5, time = 100, timeUnit = TimeUnit.MILLISECONDS)
+	@Measurement(iterations = 5, time = 100, timeUnit = TimeUnit.MILLISECONDS)
+	public void testMaxHeap(Workload workload) {
+		MaxHeap.sort(workload.data);
 	}
 
 }
