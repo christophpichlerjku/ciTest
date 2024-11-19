@@ -39,15 +39,15 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # GitHub token for authentication
         run: |
-        # Add, commit and push the benchmark results back to the repository
-        git config --global user.name "github-actions[bot]"
-        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          # Add, commit and push the benchmark results back to the repository
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
         
-        # Add the generated JSON result file
-        git add jmh-result.json
+          # Add the generated JSON result file
+          git add jmh-result.json
         
-        # Commit the changes
-        git commit -m "Add benchmark results"
+          # Commit the changes
+          git commit -m "Add benchmark results"
         
-        # Push to the same branch
-        git push origin HEAD:${{ github.ref }}
+          # Push to the same branch
+          git push origin HEAD:${{ github.ref }}
