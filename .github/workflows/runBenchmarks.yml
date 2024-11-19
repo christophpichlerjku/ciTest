@@ -35,7 +35,7 @@ jobs:
         run: mvn exec:java -Dexec.mainClass="at.jku.ssw.ciTest.SortingBenchmark"  # Change to your benchmark's entry point
         
       # Step 5: Store the benchmarks  
-      - name: Commit and push benchmark results
+      - name: Print benchmark results
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # GitHub token for authentication
         run: |
