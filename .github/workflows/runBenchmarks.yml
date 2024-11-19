@@ -37,7 +37,7 @@ jobs:
       # Step 5: Store the benchmarks  
       - name: Commit and push benchmark results
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # GitHub token for authentication
+          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}  # GitHub token for authentication
         run: |
           # Add, commit and push the benchmark results back to the repository
           git config --global user.name "github-actions[bot]"
@@ -50,4 +50,4 @@ jobs:
           git commit -m "Add benchmark results"
         
           # Push to the same branch
-          git push origin HEAD:${{ github.ref }}
+          git push https://x-access-token:${PAT_TOKEN}@github.com/${{ github.repository }} HEAD:${{ github.ref }}
