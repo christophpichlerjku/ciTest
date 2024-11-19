@@ -35,9 +35,19 @@ jobs:
         run: mvn exec:java -Dexec.mainClass="at.jku.ssw.ciTest.SortingBenchmark"  # Change to your benchmark's entry point
         
       # Step 5: Store the benchmarks  
-      - name: Upload benchmark results
-        uses: actions/upload-artifact@v3
-        with:
-          name: benchmark-results
-          path: target/benchmark-results.txt  # Adjust path to your benchmark result file
-
+      - name: Commit and push benchmark results
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # GitHub token for authentication
+        run: |
+        # Add, commit and push the benchmark results back to the repository
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        
+        # Add the generated JSON result file
+        git add jmh-result.json
+        
+        # Commit the changes
+        git commit -m "Add benchmark results"
+        
+        # Push to the same branch
+        git push origin HEAD:${{ github.ref }}
