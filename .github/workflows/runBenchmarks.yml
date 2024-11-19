@@ -44,11 +44,12 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
         
           # Add the generated JSON result file
-          git add jmh-result.json
+          #git add jmh-result.json
+          cat jmh-result.json
         
           # Commit the changes
-          git commit -m "Add benchmark results"
+          #git commit -m "Add benchmark results"
         
           # Push to the same branch
-          git push origin HEAD:${{ github.ref }}
-          # git push https://x-access-token:${PAT_TOKEN}@github.com/${{ github.repository }} HEAD:${{ github.ref }}
+          # git push origin HEAD:${{ github.ref }}
+          # git push https://x-access-token:${PAT_TOKEN}@github.com/christophpichlerjku/ciTest HEAD:${{ github.ref }}
