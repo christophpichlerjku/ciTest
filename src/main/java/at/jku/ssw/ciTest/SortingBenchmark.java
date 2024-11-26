@@ -78,6 +78,16 @@ public class SortingBenchmark {
 	@Fork(0)
 	@Warmup(iterations = 5, time = 100, timeUnit = TimeUnit.MILLISECONDS)
 	@Measurement(iterations = 5, time = 100, timeUnit = TimeUnit.MILLISECONDS)
+	public void testQuickSortBubbleSmall(Workload workload) {
+		QuickSortBubbleSmall.sort(workload.data);
+	}
+	
+	@Benchmark
+	@BenchmarkMode(Mode.SingleShotTime)
+	@OutputTimeUnit(TimeUnit.MILLISECONDS)
+	@Fork(0)
+	@Warmup(iterations = 5, time = 100, timeUnit = TimeUnit.MILLISECONDS)
+	@Measurement(iterations = 5, time = 100, timeUnit = TimeUnit.MILLISECONDS)
 	public void testQuickSortO(Workload workload) {
 		QuickSortO.sort(workload.data);
 	}
@@ -88,8 +98,19 @@ public class SortingBenchmark {
 	@Fork(0)
 	@Warmup(iterations = 5, time = 100, timeUnit = TimeUnit.MILLISECONDS)
 	@Measurement(iterations = 5, time = 100, timeUnit = TimeUnit.MILLISECONDS)
-	public void testMaxHeap(Workload workload) {
+	public void testMaxHeapSort(Workload workload) {
 		MaxHeap.sort(workload.data);
 	}
+	
+	@Benchmark
+	@BenchmarkMode(Mode.SingleShotTime)
+	@OutputTimeUnit(TimeUnit.MILLISECONDS)
+	@Fork(0)
+	@Warmup(iterations = 5, time = 100, timeUnit = TimeUnit.MILLISECONDS)
+	@Measurement(iterations = 5, time = 100, timeUnit = TimeUnit.MILLISECONDS)
+	public void testRadixSort(Workload workload) {
+		RadixSort.sort(workload.data);
+	}
+	
 
 }
